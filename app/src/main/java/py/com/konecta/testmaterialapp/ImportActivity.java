@@ -7,6 +7,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -19,23 +20,24 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ImportActivity extends AppCompatActivity implements Callback<List<Item>> {
+public class ImportActivity extends BaseActivity implements Callback<List<Item>> {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ProgressBar progressBar;
 
-    @Override
+    /*@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //setContentView(R.layout.activity_main);
+
+        init();
+
         setContentView(R.layout.activity_import);
 
         progressBar = (ProgressBar) findViewById(R.id.progressbar_login);
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
@@ -53,7 +55,7 @@ public class ImportActivity extends AppCompatActivity implements Callback<List<I
         Call<List<Item>> call = service.getItems();
         call.enqueue(this);
 
-    }
+    }*/
 
     @Override
     public void onResponse(Call<List<Item>> call, Response<List<Item>> response) {
@@ -77,5 +79,31 @@ public class ImportActivity extends AppCompatActivity implements Callback<List<I
     public void showProgress(final boolean show) {
         progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
         mRecyclerView.setVisibility(show? View.GONE: View.VISIBLE);
+    }
+
+    @Override
+    protected void inint() {
+
+        loadLayout(R.layout.activity_import);
+        setTitle("Importar");
+
+        progressBar = (ProgressBar) findViewById(R.id.progressbar_login);
+        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        mRecyclerView.setHasFixedSize(true);
+
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        DividerItemDecoration divider = new DividerItemDecoration(
+                mRecyclerView.getContext(),
+                DividerItemDecoration.VERTICAL
+        );
+        divider.setDrawable(ContextCompat.getDrawable(getBaseContext(), R.drawable.line_separator));
+        mRecyclerView.addItemDecoration(divider);
+
+        TestService service = (TestService) ServiceBuilder.create(TestService.class);
+        Call<List<Item>> call = service.getItems();
+        call.enqueue(this);
     }
 }
