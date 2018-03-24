@@ -67,7 +67,7 @@ public abstract class BaseActivity extends AppCompatActivity
     @Override
     public void setTitle(CharSequence title) {
         //mTitle = title;
-        toolbar.setTitle("My title");
+        toolbar.setTitle(title);
     }
 
     protected abstract void inint();
