@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity
         System.err.println("Item del menu seleccionado : " + id);
 
         if (id == R.id.nav_camera) {
-            Intent i = new Intent(MainActivity.this, ImportActivity.class);
+            Intent i = new Intent(MainActivity.this, ListaOfertasActivity.class);
             startActivity(i);
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {

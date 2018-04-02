@@ -40,6 +40,10 @@
         <activity android:name=".ImportActivity"
             android:label="Importar"
             android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity android:name=".ListaOfertasActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
             android:name=".GalleryActivity"
             android:label="@string/title_activity_gallery" />

@@ -5,28 +5,28 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
-/**
- * Created by Francisco on 18/03/2018.
- */
+import android.widget.ProgressBar;
 
 public abstract class BaseActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    Toolbar toolbar;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-    //protected void init() {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -53,7 +53,7 @@ public abstract class BaseActivity extends AppCompatActivity
         inint();
     }
 
-    protected void loadLayout(int layoutId) {
+    protected void loadLayout(int layoutId, String title) {
 
         View C = findViewById(R.id.content_activity);
         ViewGroup parent = (ViewGroup) C.getParent();
@@ -61,13 +61,29 @@ public abstract class BaseActivity extends AppCompatActivity
         parent.removeView(C);
         C = getLayoutInflater().inflate(layoutId, parent, false);
         parent.addView(C, index);
-
+        setTitle(title);
     }
 
     @Override
     public void setTitle(CharSequence title) {
-        //mTitle = title;
         toolbar.setTitle("My title");
+    }
+
+    protected RecyclerView getRecyclerView(int idRecyclerView) {
+        RecyclerView mRecyclerView = (RecyclerView) findViewById(idRecyclerView);
+        mRecyclerView.setHasFixedSize(true);
+
+        // use a linear layout manager
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        DividerItemDecoration divider = new DividerItemDecoration(
+                mRecyclerView.getContext(),
+                DividerItemDecoration.VERTICAL
+        );
+        divider.setDrawable(ContextCompat.getDrawable(getBaseContext(), R.drawable.line_separator));
+        mRecyclerView.addItemDecoration(divider);
+        return mRecyclerView;
     }
 
     protected abstract void inint();

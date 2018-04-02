@@ -27,36 +27,6 @@ public class ImportActivity extends BaseActivity implements Callback<List<Item>>
     private RecyclerView.LayoutManager mLayoutManager;
     private ProgressBar progressBar;
 
-    /*@Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_main);
-
-        init();
-
-        setContentView(R.layout.activity_import);
-
-        progressBar = (ProgressBar) findViewById(R.id.progressbar_login);
-        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-        mRecyclerView.setHasFixedSize(true);
-
-        // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-
-        DividerItemDecoration divider = new DividerItemDecoration(
-                mRecyclerView.getContext(),
-                DividerItemDecoration.VERTICAL
-        );
-        divider.setDrawable(ContextCompat.getDrawable(getBaseContext(), R.drawable.line_separator));
-        mRecyclerView.addItemDecoration(divider);
-
-        TestService service = (TestService) ServiceBuilder.create(TestService.class);
-        Call<List<Item>> call = service.getItems();
-        call.enqueue(this);
-
-    }*/
-
     @Override
     public void onResponse(Call<List<Item>> call, Response<List<Item>> response) {
         if (response.isSuccessful()) {
@@ -84,23 +54,9 @@ public class ImportActivity extends BaseActivity implements Callback<List<Item>>
     @Override
     protected void inint() {
 
-        loadLayout(R.layout.activity_import);
-        setTitle("Importar");
-
+        loadLayout(R.layout.activity_import, "Importar");
         progressBar = (ProgressBar) findViewById(R.id.progressbar_login);
-        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-        mRecyclerView.setHasFixedSize(true);
-
-        // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-
-        DividerItemDecoration divider = new DividerItemDecoration(
-                mRecyclerView.getContext(),
-                DividerItemDecoration.VERTICAL
-        );
-        divider.setDrawable(ContextCompat.getDrawable(getBaseContext(), R.drawable.line_separator));
-        mRecyclerView.addItemDecoration(divider);
+        mRecyclerView = getRecyclerView(R.id.my_recycler_view);        
 
         TestService service = (TestService) ServiceBuilder.create(TestService.class);
         Call<List<Item>> call = service.getItems();

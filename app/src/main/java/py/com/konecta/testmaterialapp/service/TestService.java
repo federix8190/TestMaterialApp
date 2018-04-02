@@ -14,6 +14,6 @@ import retrofit2.http.Path;
 
 public interface TestService {
 
-    @GET("TestRest/test/items")
+    @GET("/TestRest/test/items")
     Call<List<Item>> getItems();
 }
