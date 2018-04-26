@@ -7,8 +7,9 @@ public class Oferta {
     private Long id;
     private String estado;
     private String titulo;
-    private Date inicioPuja;
-    private Date finPuja;
+    private String inicioPuja;
+    private String departamento;
+    private String finPuja;
     private Integer montoBase;
     private Long montoCompra;
     private Long montoPuja;
@@ -44,19 +45,27 @@ public class Oferta {
         this.titulo = titulo;
     }
 
-    public Date getInicioPuja() {
+    public String getInicioPuja() {
         return inicioPuja;
     }
 
-    public void setInicioPuja(Date inicioPuja) {
+    public void setInicioPuja(String inicioPuja) {
         this.inicioPuja = inicioPuja;
     }
 
-    public Date getFinPuja() {
+    public String getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
+    }
+
+    public String getFinPuja() {
         return finPuja;
     }
 
-    public void setFinPuja(Date finPuja) {
+    public void setFinPuja(String finPuja) {
         this.finPuja = finPuja;
     }
 

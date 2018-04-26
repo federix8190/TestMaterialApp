@@ -1,4 +1,4 @@
-package py.com.konecta.testmaterialapp;
+package py.com.konecta.testmaterialapp.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,7 +18,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
+
+import py.com.konecta.testmaterialapp.R;
 
 public abstract class BaseActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -128,7 +129,8 @@ public abstract class BaseActivity extends AppCompatActivity
         System.err.println("Item del menu seleccionado : " + id);
 
         if (id == R.id.nav_camera) {
-            Intent i = new Intent(BaseActivity.this, ImportActivity.class);
+            Intent i = new Intent(BaseActivity.this, ListaOfertasActivity.class);
+            //Intent i = new Intent(BaseActivity.this, ImportActivity.class);
             startActivity(i);
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
@@ -137,6 +139,9 @@ public abstract class BaseActivity extends AppCompatActivity
             startActivity(i);
 
         } else if (id == R.id.nav_slideshow) {
+
+            Intent i = new Intent(BaseActivity.this, CrearOfertaActivity.class);
+            startActivity(i);
 
         } else if (id == R.id.nav_manage) {
 

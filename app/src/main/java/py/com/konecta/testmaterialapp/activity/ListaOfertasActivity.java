@@ -1,4 +1,4 @@
-package py.com.konecta.testmaterialapp;
+package py.com.konecta.testmaterialapp.activity;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -8,6 +8,7 @@ import android.widget.Toast;
 import java.util.List;
 import java.util.ArrayList;
 
+import py.com.konecta.testmaterialapp.R;
 import py.com.konecta.testmaterialapp.adapter.OfertasAdapter;
 import py.com.konecta.testmaterialapp.model.Oferta;
 import py.com.konecta.testmaterialapp.service.ListaResponse;
@@ -17,7 +18,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ListaOfertasActivity extends BaseActivity implements Callback<List<Oferta>> {
+public class ListaOfertasActivity extends BaseActivity implements Callback<ListaResponse<Oferta>> {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -31,15 +32,15 @@ public class ListaOfertasActivity extends BaseActivity implements Callback<List<
         mRecyclerView = getRecyclerView(R.id.my_recycler_view);
 
         OfertaService service = (OfertaService) ServiceBuilder.create(OfertaService.class);
-        Call<List<Oferta>> call = service.getAll();
+        Call<ListaResponse<Oferta>> call = service.listar();
         call.enqueue(this);
     }
 
     @Override
-    public void onResponse(Call<List<Oferta>> call, Response<List<Oferta>> response) {
+    public void onResponse(Call<ListaResponse<Oferta>> call, Response<ListaResponse<Oferta>> response) {
         if (response.isSuccessful()) {
-            List<Oferta> ofertas = response.body();
-            mAdapter = new OfertasAdapter(ofertas);
+            ListaResponse<Oferta> ofertas = response.body();
+            mAdapter = new OfertasAdapter(ofertas.getRows());
             mRecyclerView.setAdapter(mAdapter);
         } else {
             Toast.makeText(this, "Ocurrio un error al procesar la respuesta del Servidor", Toast.LENGTH_SHORT).show();
@@ -48,7 +49,7 @@ public class ListaOfertasActivity extends BaseActivity implements Callback<List<
     }
 
     @Override
-    public void onFailure(Call<List<Oferta>> call, Throwable t) {
+    public void onFailure(Call<ListaResponse<Oferta>> call, Throwable t) {
         t.printStackTrace();
         showProgress(false);
         List<Oferta> ofertas = new ArrayList<>();

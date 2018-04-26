@@ -8,6 +8,7 @@
 
     <string name="action_settings">Settings</string>
     <string name="title_activity_gallery">Gallery</string>
+    <string name="crear_oferta_activity">Nueva Oferta</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>

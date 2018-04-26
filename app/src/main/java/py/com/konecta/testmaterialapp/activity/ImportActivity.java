@@ -1,18 +1,14 @@
-package py.com.konecta.testmaterialapp;
+package py.com.konecta.testmaterialapp.activity;
 
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.List;
 
+import py.com.konecta.testmaterialapp.Item;
+import py.com.konecta.testmaterialapp.R;
 import py.com.konecta.testmaterialapp.adapter.MyAdapter;
 import py.com.konecta.testmaterialapp.service.ServiceBuilder;
 import py.com.konecta.testmaterialapp.service.TestService;
